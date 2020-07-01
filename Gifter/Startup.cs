@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Gifter
 {
@@ -25,16 +26,26 @@ namespace Gifter
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            //context we use to communicate with the database
-            services.AddDbContext<ApplicationDbContext>(options =>
+       
 
-            //configuring options 
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            public void ConfigureServices(IServiceCollection services)
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddControllers();
-        }
+                services.AddControllers()
+                        .AddNewtonsoftJson(options =>
+                            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        );
+            }
+            ////context we use to communicate with the database
+            //services.AddDbContext<ApplicationDbContext>(options =>
+
+            ////configuring options 
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            //services.AddControllers();
+       
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

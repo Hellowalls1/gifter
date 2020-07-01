@@ -22,7 +22,7 @@ namespace Gifter.Repositories
         //getting all
         public List<Post> GetAll()
         {
-            return _context.Post.Include(p => p.UserProfile).ToList();
+            return _context.Post.Include(p => p.UserProfile).Include(p => p.Comment).ToList();
         }
 
         //Linq methods let us filter 
@@ -30,12 +30,12 @@ namespace Gifter.Repositories
         //would normally need to create a sql query that would join the UserProfile id onto post 
         public Post GetById(int id)
         {
-            return _context.Post.Include(p => p.UserProfile) //accessing the full object "UserProfile" which is on the post model
+            return _context.Post.Include(p => p.Comment).Include(p => p.UserProfile) //accessing the full object "UserProfile" which is on the post model
                                 .FirstOrDefault(p => p.Id == id); //getting the first post with id
         }
         public List<Post> GetByUserProfileId(int id)
         {
-            return _context.Post.Include(p => p.UserProfile)
+            return _context.Post.Include(p => p.Comment).Include(p => p.UserProfile)
                             .Where(p => p.UserProfileId == id) //where userProfileId is passed in
                             .OrderBy(p => p.Title) //order by the title
                             .ToList();
