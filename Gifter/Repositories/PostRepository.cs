@@ -31,7 +31,7 @@ namespace Gifter.Repositories
         public Post GetById(int id)
         {
             return _context.Post.Include(p => p.Comment).Include(p => p.UserProfile) //accessing the full object "UserProfile" which is on the post model
-                                .FirstOrDefault(p => p.Id == id); //getting the first post with id
+                                .FirstOrDefault(p => p.Id == id); //getting the first post with id 
         }
         public List<Post> GetByUserProfileId(int id)
         {
@@ -58,6 +58,27 @@ namespace Gifter.Repositories
             var post = GetById(id); 
             _context.Post.Remove(post);
             _context.SaveChanges();
+        }
+
+
+
+        //going to return a list of posts by two method parameters
+        //criterion is a single criteria and then a direction for how it will sort
+        //
+        public List<Post> Search(string criterion, bool sortDescending)
+        {
+            var query = _context.Post
+                                .Include(p => p.UserProfile) //getting the userProfile for each post
+                                .Where(p => p.Title.Contains(criterion)); //filtering where the title contains the criteria we are searching for (entity knows how to turn this into code)
+
+            //ternary for if sortDescending is true/valse
+            //whenever we call ToList is when we execute the query
+            //query is not executed until you need the list
+            //ToList means I want to take this data and put it in a list and if I want to do that I need the data (FIRSTORDEFAULT ALSO EXECUTES!!!) 
+
+            return sortDescending
+                ? query.OrderByDescending(p => p.DateCreated).ToList()
+                : query.OrderBy(p => p.DateCreated).ToList();
         }
 
     }
