@@ -80,7 +80,7 @@ namespace Gifter.Controllers
         //"q" is commonly used as a parameter in a search request
         //return is getting converted into JSON then sent out
         [HttpGet("search")]
-        public IActionResult Search(string q, bool sortDesc)
+        public IActionResult Search(string q,  bool sortDesc)
         {
             return Ok(_postRepository.Search(q, sortDesc));
         }

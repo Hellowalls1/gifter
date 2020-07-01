@@ -65,11 +65,13 @@ namespace Gifter.Repositories
         //going to return a list of posts by two method parameters
         //criterion is a single criteria and then a direction for how it will sort
         //
-        public List<Post> Search(string criterion, bool sortDescending)
+        public List<Post> Search(string criterion,  bool sortDescending)
         {
             var query = _context.Post
                                 .Include(p => p.UserProfile) //getting the userProfile for each post
-                                .Where(p => p.Title.Contains(criterion)); //filtering where the title contains the criteria we are searching for (entity knows how to turn this into code)
+                                .Where(p => p.Title.Contains(criterion) | p.Caption.Contains(criterion)); //filtering where the title contains the criteria we are searching for (entity knows how to turn this into code)
+                                
+
 
             //ternary for if sortDescending is true/valse
             //whenever we call ToList is when we execute the query
