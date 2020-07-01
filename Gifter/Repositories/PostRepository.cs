@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Gifter.Data;
 using Gifter.Models;
+using System;
 
 
 //we are saving an instance of our instance d
@@ -70,8 +71,9 @@ namespace Gifter.Repositories
             var query = _context.Post
                                 .Include(p => p.UserProfile) //getting the userProfile for each post
                                 .Where(p => p.Title.Contains(criterion) | p.Caption.Contains(criterion)); //filtering where the title contains the criteria we are searching for (entity knows how to turn this into code)
-                                
 
+                                
+            
 
             //ternary for if sortDescending is true/valse
             //whenever we call ToList is when we execute the query
@@ -83,5 +85,15 @@ namespace Gifter.Repositories
                 : query.OrderBy(p => p.DateCreated).ToList();
         }
 
+        public List<Post> Hottest(DateTime since)
+        {
+            return _context.Post
+                           .Include(p => p.UserProfile)
+                           .Where(p => p.DateCreated >= since)
+                           .ToList();
+
+          
+
+        }
     }
 }
