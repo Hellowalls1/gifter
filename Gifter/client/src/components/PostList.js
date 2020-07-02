@@ -1,29 +1,23 @@
 import React, { useContext, useEffect } from "react";
 import { PostContext } from "../providers/PostProvider";
+import Post from "./Post";
 
 const PostList = () => {
-
-    //posts is an array of posts
-    //get all is the method for all of them 
-    const { posts, getAllPosts } = useContext(PostContext); //copnsuming post context from the provider
+    const { posts, getAllPosts } = useContext(PostContext);
 
     useEffect(() => {
         getAllPosts();
     }, []);
 
-
-    //mapping over and listing all of the posts
     return (
-        <div>
-            {posts.map((post) => (
-                <div key={post.id}>
-                    <img src={post.imageUrl} alt={post.title} />
-                    <p>
-                        <strong>{post.title}</strong>
-                    </p>
-                    <p>{post.caption}</p>
+        <div className="container">
+            <div className="row justify-content-center">
+                <div class="cards-column">
+                    {posts.map((post) => (
+                        <Post key={post.id} post={post} />
+                    ))}
                 </div>
-            ))}
+            </div>
         </div>
     );
 };
