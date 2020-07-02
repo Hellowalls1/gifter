@@ -13,7 +13,9 @@ const PostList = () => {
         getAllPosts();
     }, [posts]);
 
+
     return (
+
         <div className="container">
             <div className="row justify-content-center">
                 <div class="cards-column">

@@ -14,6 +14,12 @@ export const PostProvider = (props) => {
 
     };
 
+    const searchPosts = (query) => {
+        return fetch(`api/post/search?q=${query}`)
+            .then((res) => res.json())
+            .then(setPosts);
+
+    };
     const addPost = (post) => {
         return fetch("api/post", {
             method: "POST",
@@ -24,8 +30,9 @@ export const PostProvider = (props) => {
         });
     };
 
+
     return (   //value for the provider that we are sending out
-        <PostContext.Provider value={{ posts, getAllPosts, addPost }}>
+        <PostContext.Provider value={{ posts, getAllPosts, addPost, searchPosts }}>
             {props.children}
         </PostContext.Provider>
     );
