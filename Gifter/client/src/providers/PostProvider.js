@@ -11,6 +11,7 @@ export const PostProvider = (props) => {
         return fetch("api/post") //can make fetch requests to relative urls via the "proxy" in package json 
             .then((res) => res.json())
             .then(setPosts);
+
     };
 
     const addPost = (post) => {
