@@ -149,3 +149,6 @@ C:\Users\User\workspace\Gifter\Gifter\bin\Debug\netcoreapp3.1\runtimes\unix\lib\
 C:\Users\User\workspace\Gifter\Gifter\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\User\workspace\Gifter\Gifter\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\User\workspace\Gifter\Gifter\obj\Debug\netcoreapp3.1\Gifter.csproj.CopyComplete
+C:\Users\User\workspace\Gifter\Gifter\bin\Debug\netcoreapp3.1\client\package-lock.json
+C:\Users\User\workspace\Gifter\Gifter\bin\Debug\netcoreapp3.1\client\package.json
+C:\Users\User\workspace\Gifter\Gifter\bin\Debug\netcoreapp3.1\client\public\manifest.json
