@@ -3,6 +3,7 @@ import "./App.css";
 import { PostProvider } from "./providers/PostProvider";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
+import { SearchBar } from "./components/SearchBar";
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <PostProvider>
         <PostForm />
+        <SearchBar />
         <PostList />
       </PostProvider>
     </div>

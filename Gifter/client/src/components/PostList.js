@@ -9,9 +9,8 @@ const PostList = () => {
         getAllPosts();
     }, []);
 
-    useEffect(() => {
-        getAllPosts();
-    }, [posts]);
+
+
 
 
     return (
