@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from "react"
 import { PostContext } from "../providers/PostProvider"
-
+import { useHistory } from "react-router-dom";
 import { Button, Form, Input } from "reactstrap"
 
 export default () => {
@@ -11,7 +11,7 @@ export default () => {
     const ImageUrl = useRef()
     const Caption = useRef()
 
-
+    const history = useHistory();
 
     const SubmitPost = () => {
 
@@ -23,9 +23,10 @@ export default () => {
             DateCreated: new Date()
         }
         //passing the post representation to the functon
-        addPost(Post)
+        addPost(Post).then((p) => {
+            history.push("/");
+        });
     }
-
 
     return (
         <div className="container">

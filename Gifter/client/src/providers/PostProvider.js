@@ -8,7 +8,7 @@ export const PostProvider = (props) => {
     const [posts, setPosts] = useState([]); //holding posts
 
     const getAllPosts = () => {
-        return fetch("api/post") //can make fetch requests to relative urls via the "proxy" in package json 
+        return fetch("/api/post") //can make fetch requests to relative urls via the "proxy" in package json 
             .then((res) => res.json())
             .then(setPosts);
 
@@ -16,14 +16,14 @@ export const PostProvider = (props) => {
 
     const searchPosts = (query) => {
         debugger
-        return fetch(`api/post/search?q=${query}`)
+        return fetch(`/api/post/search?q=${query}`)
             .then((res) => res.json())
             .then(setPosts);
     };
 
 
     const addPost = (post) => {
-        return fetch("api/post", {
+        return fetch("/api/post", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -32,15 +32,14 @@ export const PostProvider = (props) => {
         });
     };
 
-    const getAllComments = () => {
-        return fetch("api/comment")
-            .then((res) => res.json())
-            .then(setPosts);
-    }
 
+
+    const getPost = (id) => {
+        return fetch(`/api/post/${id}`).then((res) => res.json());
+    };
 
     return (   //value for the provider that we are sending out
-        <PostContext.Provider value={{ posts, getAllPosts, addPost, searchPosts, getAllComments }}>
+        <PostContext.Provider value={{ posts, getAllPosts, addPost, searchPosts, getPost }}>
             {props.children}
         </PostContext.Provider>
     );
