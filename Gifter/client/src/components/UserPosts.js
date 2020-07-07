@@ -5,26 +5,28 @@ import { useParams } from "react-router-dom";
 import Post from "./Post";
 
 const UserPosts = () => {
-    const { post, setUserPost } = useState();
-    const { getUserPosts } = useContext(PostContext);
-    const { id } = useParams()
+
+    const { getUserPosts, userPosts } = useContext(PostContext);
+    const { id } = useParams();
 
     useEffect(() => {
-        getUserPosts(id).then(setUserPost);
+        getUserPosts(id)
     }, []);
 
-    if (!post) {
+    if (!userPosts) {
         return null;
     }
+
     return (
 
+        //mapping over usePosts(userPosts have a state that is set after getUserPosts gets JSONIFIED ) and displaying an instance of a post based on id
         <div className="container">
             <div className="row justify-content-center">
                 <div className="cards-column">
-                    <Post post={post} />
-                    {/* {posts.map((post) => (
+                    {userPosts.map((post) => (
                         <Post key={post.id} post={post} />
-                    ))} */}
+
+                    ))}
                 </div>
             </div>
         </div>

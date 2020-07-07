@@ -6,6 +6,7 @@ export const PostContext = React.createContext();
 //provider makes fetch to api and holds state
 export const PostProvider = (props) => {
     const [posts, setPosts] = useState([]); //holding posts
+    const [userPosts, setUserPosts] = useState([])
 
     const getAllPosts = () => {
         return fetch("/api/post") //can make fetch requests to relative urls via the "proxy" in package json 
@@ -23,6 +24,7 @@ export const PostProvider = (props) => {
 
 
     const addPost = (post) => {
+
         return fetch("/api/post", {
             method: "POST",
             headers: {
@@ -40,11 +42,13 @@ export const PostProvider = (props) => {
 
     //bringing in the get posts by user id from back end
     const getUserPosts = (id) => {
-        return fetch(`/api/post/getbyuser/${id}`).then((res) => res.json());
+        return fetch(`/api/post/getbyuser/${id}`)
+            .then((res) => res.json())
+            .then(setUserPosts); //setting a state of the user posts
     }
 
     return (   //value for the provider that we are sending out
-        <PostContext.Provider value={{ posts, getAllPosts, addPost, searchPosts, getPost, getUserPosts }}>
+        <PostContext.Provider value={{ posts, getAllPosts, addPost, searchPosts, getPost, getUserPosts, userPosts }}>
             {props.children}
         </PostContext.Provider>
     );
