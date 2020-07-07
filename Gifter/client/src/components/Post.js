@@ -8,7 +8,7 @@ const Post = ({ user, post }) => {
     return (
         <Card className="m-4">
             <p className="text-left px-2">Posted by:
-                <Link to={`/ users / ${post.UserProfileId}`}>
+                <Link to={`/users/${post.userProfile.id}`}>
                     <strong>{post.userProfile.name}</strong>
                 </Link>
             </p>
@@ -16,7 +16,7 @@ const Post = ({ user, post }) => {
             <CardImg top src={post.imageUrl} alt={post.title} />
             <CardBody>
                 <p>
-                    <Link to={`/ posts / ${post.id}`}>
+                    <Link to={`/posts/${post.id}`}>
                         <strong>{post.title}</strong>
                     </Link>
                 </p>
